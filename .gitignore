@@ -24,3 +24,24 @@ proguard/
 
 # Log Files
 *.log
+
+# Eclipse project files
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+.classpath
+.settings/
+.loadpath
+
+# Intellij project files
+*.iml
+*.ipr
+*.iws
+.idea/
