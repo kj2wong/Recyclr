@@ -9,72 +9,80 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.knr.recyclr.MainActivity" >
 
-    <TextView
-        android:id="@+id/scan_format"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="true" />
-
-    <TextView
-        android:id="@+id/scan_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/scan_format"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="true" />
-
-    <TextView
-        android:id="@+id/scan_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/scan_content"
-        android:layout_centerHorizontal="true"
-        android:textIsSelectable="true" />
-    
-    <RelativeLayout
+    <LinearLayout 
         android:layout_width="match_parent"
-    	android:layout_height="match_parent">
-	    <ImageView
-	        android:id="@+id/recycle_thin_background"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_centerInParent="true"
-	        android:contentDescription="@string/searchRepoDesc"
-	        android:paddingTop="40dip"
-	        android:src="@drawable/recycle_arrows_thin" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        >
+        <LinearLayout 
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:paddingTop="30dip"
+        	>
+		    <ImageView
+		        android:id="@+id/search_button"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:contentDescription="@string/searchRepoDesc"
+		        android:src="@drawable/search" />
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textIsSelectable="true"
+		        android:textSize="28sp" 
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="10dip"
+		        android:text="Search a Barcode"/>
+		</LinearLayout>
+        
+		<LinearLayout 
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:paddingTop="30dip"
+        	>
+		    <ImageView
+		        android:id="@+id/add_item"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:contentDescription="@string/centerLogoDesc"
+		        android:src="@drawable/add_item" />
 
-	    <ImageView
-	        android:id="@+id/add_item"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentRight="true"
-	        android:layout_alignTop="@+id/search_button"
-	        android:layout_marginRight="24dp"
-	        android:contentDescription="@string/centerLogoDesc"
-	        android:src="@drawable/add_item" />
-
-	    <ImageView
-	        android:id="@+id/search_button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentLeft="true"
-	        android:layout_alignParentTop="true"
-	        android:layout_marginLeft="21dp"
-	        android:layout_marginTop="165dp"
-	        android:contentDescription="@string/searchRepoDesc"
-	        android:src="@drawable/search" />
-
-	    <ImageView
-	        android:id="@+id/indexes_button"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:layout_alignParentBottom="true"
-	        android:layout_centerHorizontal="true"
-	        android:layout_marginBottom="46dp"
-	        android:contentDescription="@string/centerLogoDesc"
-	        android:src="@drawable/files" />
-
-    </RelativeLayout>
-
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center|clip_horizontal"
+		        android:text="Add a Barcode"
+		        android:textIsSelectable="true"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="20dip"
+		        android:textSize="28sp" />
+		</LinearLayout>
+		
+		<LinearLayout 
+        	android:layout_width="match_parent"
+        	android:layout_height="wrap_content"
+        	android:paddingTop="30dip"
+        	>
+		    <ImageView
+		        android:id="@+id/indexes_button"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:contentDescription="@string/centerLogoDesc"
+		        android:src="@drawable/files" />
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textIsSelectable="true" 
+		        android:textSize="28sp"
+		        android:layout_marginLeft="10dip"
+		        android:layout_marginTop="10dip"
+		        android:text="Items without Barcode"/>
+		</LinearLayout>
+    </LinearLayout>
+    
+  	<LinearLayout 
+  	    android:layout_width="match_parent"
+       	android:layout_height="wrap_content">
+  	</LinearLayout>
 </RelativeLayout>
