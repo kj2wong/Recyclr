@@ -1,69 +1,48 @@
 package com.knr.recyclr;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.temboo.Library.MySQL.RunCommand;
-import com.temboo.Library.MySQL.RunCommand.RunCommandInputSet;
-import com.temboo.Library.MySQL.RunCommand.RunCommandResultSet;
-import com.temboo.core.TembooSession;
-
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.TextView;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 public class DatabaseWrapper {
 	
 }
 
-class MySQLTask extends AsyncTask<String, Void, RunCommandResultSet> {
+class MySQLTask extends AsyncTask<String, Void, String> {
 	private Context context;
 	private Activity activity;
+	private Connection conn;
 	
-	public MySQLTask(Context context, Activity activity) {
+	public MySQLTask(Context context, Activity activity, Connection conn) {
 		this.context = context;
 		this.activity = activity;
+		this.conn = conn;
 	}
 	
     @Override
-    protected RunCommandResultSet doInBackground(String... sql) {
-        try {
-        	JSONObject secret;
-      		String apiKey;
-        	try {
-        		secret = new JSONObject(Helper.loadJSONFromAsset(context, "config.json"));
-        		apiKey = secret.getString("temboo_key");
-    		}
-       		catch (JSONException e) {
-       			System.out.println(e.toString());
-       			return null;
-       		}
-            TembooSession session = new TembooSession("recyclr", "Recyclr", apiKey);
-            RunCommand runCommandChoreo = new RunCommand(session);
-            // Get an InputSet object for the choreo
-            RunCommandInputSet runCommandInputs = runCommandChoreo.newInputSet();
-            runCommandInputs.setCredential("MysqlCredentials");
-            // Set SQL statement
-            runCommandInputs.set_SQL(sql[0]);
-            // Execute Choreo
-            return runCommandChoreo.execute(runCommandInputs);
-        } catch(Exception e) {
-            // if an exception occurred, log it
-            System.out.printf(this.getClass().toString(), e.getMessage());
-        }
+    protected String doInBackground(String... sql) {
+    	try {
+    		Statement stmt = conn.createStatement();
+    		stmt.execute(sql[0]);
+    		stmt.close();
+    	} catch (SQLException ex) {
+    	    // handle any errors
+    	    System.out.println("SQLException: " + ex.getMessage());
+    	    System.out.println("SQLState: " + ex.getSQLState());
+    	    System.out.println("VendorError: " + ex.getErrorCode());
+    	}
         return null;
     }
 
-    protected void onPostExecute(RunCommandResultSet result) {
-    	if(!result.equals(null)) {
-	        if(result.get_ResultData().isEmpty()) {
-	        	// completed insert statement
-	        } else {
-	        	// completed select statement
-	        	// TextView descText = (TextView) activity.findViewById(R.id.scan_description);
-	        	// descText.setText("DESCRIPTION: " + result.get_ResultData());
-	        }
+    protected void onPostExecute(String result) {
+    	if(result != null) {
+	        //TextView descText = (TextView) activity.findViewById(R.id.scan_description);
+	        //descText.setText("DESCRIPTION: " + result);
     	}
     }
 }
