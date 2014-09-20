@@ -41,8 +41,8 @@ class MySQLTask extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result) {
     	if(result != null) {
-	        TextView descText = (TextView) activity.findViewById(R.id.scan_description);
-	        descText.setText("DESCRIPTION: " + result);
+	        //TextView descText = (TextView) activity.findViewById(R.id.scan_description);
+	        //descText.setText("DESCRIPTION: " + result);
     	}
     }
 }

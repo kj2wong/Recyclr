@@ -9,5 +9,8 @@
 	<color name="green">#05aa8b</color>
 	<string name="searchRepoDesc">Find how to dispose of thi</string>
 	<string  name="centerLogoDesc">Logo in the middle of page</string>
+	<string name="item_recycling_string">Recycling</string>
+	<string name="item_compost_string">Compost</string>
+	<string name="item_garbage_string">Garbage</string>
 	
 </resources>
