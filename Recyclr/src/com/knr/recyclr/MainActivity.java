@@ -23,6 +23,9 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends ActionBarActivity implements OnClickListener{
 	
 	private LinearLayout scanBtn;
@@ -57,19 +60,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     	// Connect to RDS Database
     	try {
-    		JSONObject secret;
-      		String user = null, pass = null, host = null;
-        	try {
-        		secret = new JSONObject(Helper.loadJSONFromAsset(getApplicationContext(), "config.json"));
-        		user = secret.getString("db_user");
-        		pass = secret.getString("db_pass");
-        		host = secret.getString("db_host");
-    		}
-       		catch (JSONException e) {
-       			// TODO: things
-       		}
+    		String[] names = {"db_host", "db_user", "db_pass"};
+    		String[] params = JSONHelper.loadMultipleFromAsset(getApplicationContext(), 
+    				"config.json", names);
     	    conn = DriverManager.getConnection(
-    	    		String.format("jdbc:mysql://%s?user=%s&password=%s", host, user, pass));
+    	    		String.format("jdbc:mysql://%s?user=%s&password=%s", 
+    	    				params[0], params[1], params[2]));
     	} catch (SQLException ex) {
     		// TODO: handle any errors
     	    System.out.println("SQLException: " + ex.getMessage());
