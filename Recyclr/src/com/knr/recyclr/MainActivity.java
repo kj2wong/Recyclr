@@ -32,7 +32,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         
         addBtn = (ImageView)findViewById(R.id.add_item);
         addBtn.setOnClickListener(this);
+
+        scanBtn.setOnClickListener(this);
         
+        //new MySQLTask(getApplicationContext(), this).execute("insert into action (upc, recycle, trash) values ('0', 0, 0)");
+        //new MySQLTask(getApplicationContext(), this).execute("select * from action");
+
         infoBtn = (ImageView)findViewById(R.id.indexes_button);
         infoBtn.setOnClickListener(this);
     }

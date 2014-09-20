@@ -32,7 +32,7 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
   		String apiKey;
     	try {
     		secret = new JSONObject(Helper.loadJSONFromAsset(context, "config.json"));
-    		apiKey = secret.getString("apiKey");
+    		apiKey = secret.getString("upc_api_key");
 		}
    		catch (JSONException e) {
    			return null;
