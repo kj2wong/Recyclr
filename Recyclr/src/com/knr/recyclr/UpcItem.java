@@ -14,8 +14,9 @@ public class UpcItem {
 			this.itemName = jsonObj.getString("itemname");
 			this.description = jsonObj.getString("description");
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			this.number = 0;
+			this.itemName = "invalid item";
+			this.description = "invalid UPC code";
 		}
 	}
 }

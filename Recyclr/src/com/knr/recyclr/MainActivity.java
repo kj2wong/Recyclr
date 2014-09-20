@@ -1,5 +1,6 @@
 package com.knr.recyclr;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -72,7 +73,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		
     		formatTxt.setText("FORMAT: " + scanFormat);
     		contentTxt.setText("CONTENT: " + scanContent);
-    		System.out.println(UpcWrapper.getItem(getApplicationContext(), parsed));
+    		
+    		new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
 		}
     	else{
     	    Toast toast = Toast.makeText(getApplicationContext(), 
