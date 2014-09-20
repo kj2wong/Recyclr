@@ -45,3 +45,6 @@ tmp/**/*
 *.ipr
 *.iws
 .idea/
+
+# Secret files
+*.secret
