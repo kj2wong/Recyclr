@@ -7,6 +7,7 @@
 	<string name="scan">Scan</string>
 	<color name="white">#FFFFFF</color>
 	<color name="green">#05aa8b</color>
+	<color name="red_transparent">#66C0C0BA</color>
 	<string name="searchRepoDesc">Find how to dispose of thi</string>
 	<string  name="centerLogoDesc">Logo in the middle of page</string>
 	<string name="item_recycling_string">Recycling</string>
