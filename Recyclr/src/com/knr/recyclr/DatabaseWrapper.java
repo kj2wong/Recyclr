@@ -11,7 +11,22 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseWrapper {
+	private Context context;
+	private Activity activity;
+	private Connection conn;
 	
+	public DatabaseWrapper (Context context, Activity activity, Connection conn){
+		this.context = context;
+		this.activity = activity;
+		this.conn = conn;
+		
+    	// Sample code for executing MySQL statements
+    	// new MySQLTask(getApplicationContext(), this, conn).execute("select * from action");
+	}
+	
+	public String getAction(UpcItem upc){
+		String query = "SELECT recycle, trash FROM action where UPC = \"5557742026\"";
+	}
 }
 
 //Class for executing select SQL statements
