@@ -1,5 +1,9 @@
 package com.knr.recyclr;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,12 +19,18 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import java.sql.DriverManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends ActionBarActivity implements OnClickListener{
 	
 	private ImageView scanBtn;
 	private ImageView addBtn;
 	private ImageView infoBtn;
 	private int viewId;
+	private Connection conn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,12 +44,42 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         addBtn.setOnClickListener(this);
 
         scanBtn.setOnClickListener(this);
-        
-        //new MySQLTask(getApplicationContext(), this).execute("insert into action (upc, recycle, trash) values ('0', 0, 0)");
-        //new MySQLTask(getApplicationContext(), this).execute("select * from action");
 
         infoBtn = (ImageView)findViewById(R.id.indexes_button);
         infoBtn.setOnClickListener(this);
+        
+        // Startup JDBC driver
+    	try {
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+    	// Connect to RDS Database
+    	try {
+    		JSONObject secret;
+      		String user = null, pass = null, host = null;
+        	try {
+        		secret = new JSONObject(Helper.loadJSONFromAsset(getApplicationContext(), "config.json"));
+        		user = secret.getString("db_user");
+        		pass = secret.getString("db_pass");
+        		host = secret.getString("db_host");
+    		}
+       		catch (JSONException e) {
+       			// TODO: things
+       		}
+    	    conn = DriverManager.getConnection(
+    	    		String.format("jdbc:mysql://%s?user=%s&password=%s", host, user, pass));
+    	} catch (SQLException ex) {
+    		// TODO: handle any errors
+    	    System.out.println("SQLException: " + ex.getMessage());
+    	    System.out.println("SQLState: " + ex.getSQLState());
+    	    System.out.println("VendorError: " + ex.getErrorCode());
+    	}
+    	
+    	// Sample code for executing MySQL statements
+    	// new MySQLTask(getApplicationContext(), this, conn).execute("select * from action");
     }
 
 
