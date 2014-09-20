@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DatabaseWrapper {
-	
+
 }
 
 //Class for executing select SQL statements
