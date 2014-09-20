@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -81,6 +82,20 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     			new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
     		}
     		else if (this.viewId==R.id.add_item) {
+    			//Creating the instance of PopupMenu  
+                PopupMenu popup = new PopupMenu(MainActivity.this, this.addBtn);  
+                //Inflating the Popup using xml file  
+                popup.getMenuInflater().inflate(R.menu.item_classification, popup.getMenu());  
+               
+                //registering popup with OnMenuItemClickListener  
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {  
+                 public boolean onMenuItemClick(MenuItem item) {  
+                  Toast.makeText(MainActivity.this,"You Clicked : " + item.getTitle(),Toast.LENGTH_SHORT).show();  
+                  return true;  
+                 }  
+                });  
+      
+                popup.show();//showing popup menu  
     			// create a new class to add and update database
     		}
 		}
