@@ -30,6 +30,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         contentTxt = (TextView)findViewById(R.id.scan_content);
         
         scanBtn.setOnClickListener(this);
+        
+        new MySQLTask(getApplicationContext(), this).execute("insert into action (upc, recycle, trash) values ('0', 0, 0)");
+        new MySQLTask(getApplicationContext(), this).execute("select * from action");
     }
 
 
