@@ -10,14 +10,25 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.content.Context;
 
 public class UpcWrapper {	
 	public static UpcItem getItem(Context context, String upcCode) {
 		// format URL for API call
+		JSONObject secret;
+		String apiKey;
+		try {
+			secret = new JSONObject(Helper.loadJSONFromAsset(context, "config.json"));
+			apiKey = secret.getString("apiKey");
+		}
+		catch (JSONException e) {
+			return null;
+		}
 		String url = String.format("http://http://api.upcdatabase.org/json/%s/%s", 
-				context.getString(R.string.api_key, upcCode));
+			apiKey, upcCode);
 		HttpClient httpclient = new DefaultHttpClient();
 	    HttpResponse response = null;
 		try {

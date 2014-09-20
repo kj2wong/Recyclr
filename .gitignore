@@ -25,6 +25,9 @@ proguard/
 # Log Files
 *.log
 
+# SecretFiles
+config.json
+
 # Eclipse project files
 *.pydevproject
 .project

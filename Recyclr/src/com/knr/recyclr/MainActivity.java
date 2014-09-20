@@ -67,8 +67,12 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		//we have a result
     		String scanContent = scanningResult.getContents();
     		String scanFormat = scanningResult.getFormatName();
+    		
+    		String parsed = scanContent.substring(1, scanContent.length()-1);
+    		
     		formatTxt.setText("FORMAT: " + scanFormat);
     		contentTxt.setText("CONTENT: " + scanContent);
+    		System.out.println(UpcWrapper.getItem(getApplicationContext(), parsed));
 		}
     	else{
     	    Toast toast = Toast.makeText(getApplicationContext(), 
