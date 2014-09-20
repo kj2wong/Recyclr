@@ -16,7 +16,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
 	private Context context;
@@ -79,7 +78,7 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
     }
     
     protected void onPostExecute(UpcItem item) {
-    	TextView descText = (TextView) activity.findViewById(R.id.scan_description);
-    	descText.setText("DESCRIPTION: " + item.description);
+    	// search bar-code against database
+    	// create alert message describing recyclable/garbage/compost
     }
 }

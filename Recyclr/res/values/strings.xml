@@ -5,4 +5,9 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
 	<string name="scan">Scan</string>
+	<color name="white">#FFFFFF</color>
+	<color name="green">#05aa8b</color>
+	<string name="searchRepoDesc">Find how to dispose of thi</string>
+	<string  name="centerLogoDesc">Logo in the middle of page</string>
+	
 </resources>

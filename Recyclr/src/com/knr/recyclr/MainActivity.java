@@ -8,8 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -17,22 +16,29 @@ import com.google.zxing.integration.android.IntentResult;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener{
 	
-	private Button scanBtn;
-	private TextView formatTxt, contentTxt;
+	private ImageView scanBtn;
+	private ImageView addBtn;
+	private ImageView infoBtn;
+	private int viewId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
-        scanBtn = (Button)findViewById(R.id.scan_button);
-        formatTxt = (TextView)findViewById(R.id.scan_format);
-        contentTxt = (TextView)findViewById(R.id.scan_content);
-        
+        getActionBar().hide();
+        scanBtn = (ImageView)findViewById(R.id.search_button);
         scanBtn.setOnClickListener(this);
         
-        new MySQLTask(getApplicationContext(), this).execute("insert into action (upc, recycle, trash) values ('0', 0, 0)");
-        new MySQLTask(getApplicationContext(), this).execute("select * from action");
+        addBtn = (ImageView)findViewById(R.id.add_item);
+        addBtn.setOnClickListener(this);
+
+        scanBtn.setOnClickListener(this);
+        
+        //new MySQLTask(getApplicationContext(), this).execute("insert into action (upc, recycle, trash) values ('0', 0, 0)");
+        //new MySQLTask(getApplicationContext(), this).execute("select * from action");
+
+        infoBtn = (ImageView)findViewById(R.id.indexes_button);
+        infoBtn.setOnClickListener(this);
     }
 
 
@@ -57,27 +63,31 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     
     public void onClick(View v){
     	//respond to clicks
-    	if(v.getId()==R.id.scan_button){
+    	this.viewId = v.getId();
+    	if(v.getId()==R.id.search_button || v.getId()==R.id.add_item){
     		//scan
     		IntentIntegrator scanIntegrator = new IntentIntegrator(this);
     		scanIntegrator.initiateScan();
 		}
+    	if(v.getId()==R.id.indexes_button) {
+    		// open another list activities that lists common materials
+    	}
 	}
     
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
     	//retrieve scan result
     	IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-    	if (scanningResult != null) {
+    	if (scanningResult != null && scanningResult.getContents() != null) {
     		//we have a result
     		String scanContent = scanningResult.getContents();
-    		String scanFormat = scanningResult.getFormatName();
-    		
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		
-    		formatTxt.setText("FORMAT: " + scanFormat);
-    		contentTxt.setText("CONTENT: " + scanContent);
-    		
-    		new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
+    		if(this.viewId==R.id.search_button) {
+    			new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
+    		}
+    		else if (this.viewId==R.id.add_item) {
+    			// create a new class to add and update database
+    		}
 		}
     	else{
     	    Toast toast = Toast.makeText(getApplicationContext(), 
