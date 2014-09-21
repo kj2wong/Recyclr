@@ -35,8 +35,8 @@ public class DatabaseWrapper {
 		new SQLSelect(context, activity, conn).execute(query);
 	}
 	
-	public void setUpc(UpcItem upc){
-		
+	public void setUpc(UpcItem upc, Boolean trash){
+		new SQLUpdate(context, activity, conn, upc, trash).execute();
 	}
 }
 
@@ -105,9 +105,12 @@ class SQLSelect extends MySQLTask {
 // Class for executing insert SQL statements 
 class SQLUpdate extends MySQLTask {
 	private UpcItem item;
-	public SQLUpdate(Context context, Activity activity, Connection conn, UpcItem item) {
+	private Boolean trash;
+	
+	public SQLUpdate(Context context, Activity activity, Connection conn, UpcItem item, Boolean trash) {
 		super(context, activity, conn);	
 		this.item = item;
+		this.trash = trash;
 	}
 	
     @Override
@@ -115,9 +118,28 @@ class SQLUpdate extends MySQLTask {
     	try {
     		Statement stmt = conn.createStatement();
     		String query = "SELECT recycle, trash FROM action where UPC = \"" + item.number + "\"";
-    		stmt.executeQuery(query);
-    		stmt.executeUpdate(sql[0]);
+    		ResultSet results = stmt.executeQuery(query);
+    		results.next();
+    		int[] actions = new int[2];
+    		String update = "";
+    		try {
+    			actions[0] = results.getInt("recycle");
+    			actions[1] = results.getInt("trash");
+    			// Update values 
+    			if(trash) {
+    				update = "update action set trash = trash+1 where upc = \"" + item.number + "\"";
+    			} else {
+    				update = "update action set recycle = recycle+1 where upc = \"" + item.number + "\"";
+    			}
+    		}
+    		catch (Exception e) {
+    			// Insert new
+    			update = String.format("insert into action (upc, recycle, trash) values (\"%s\", \"%s\", \"%s\")", 
+    					item.number, !trash ? 1:0, trash ? 1:0);
+    		}
+    		stmt.execute(update);
     		stmt.close();
+    		return actions;
     	} catch (SQLException ex) {
     	    // handle any errors
     	    System.out.println("SQLException: " + ex.getMessage());
