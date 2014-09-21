@@ -118,7 +118,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		if(this.viewId==R.id.search_section_btn) {
     			DatabaseWrapper db_wrap = new DatabaseWrapper(
     					getApplicationContext(), (Activity)this, conn);
-        		db_wrap.getAction(scanContent);
+        		db_wrap.getAction(parsed);
     		}
     		else if (this.viewId==R.id.additem_section_btn) {
     			//Creating the instance of PopupMenu  
