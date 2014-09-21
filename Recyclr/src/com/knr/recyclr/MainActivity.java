@@ -29,6 +29,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	private ImageView infoBtn;
 	private int viewId;
 	private Connection conn;
+	
+	public Connection getConn() {
+		return conn;
+	}
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,21 +62,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 			e.printStackTrace();
 		}
 
-    	// Connect to RDS Database
-    	try {
-    		String[] names = {"db_host", "db_user", "db_pass"};
-    		String[] params = JSONHelper.loadMultipleFromAsset(getApplicationContext(), 
-    				"config.json", names);
-    	    conn = DriverManager.getConnection(
-    	    		String.format("jdbc:mysql://%s?user=%s&password=%s", 
-    	    				params[0], params[1], params[2]));
-    	} catch (SQLException ex) {
-    		// TODO: handle any errors
-    	    System.out.println("SQLException: " + ex.getMessage());
-    	    System.out.println("SQLState: " + ex.getSQLState());
-    	    System.out.println("VendorError: " + ex.getErrorCode());
-    	}
-    	
+    	new DatabaseConnection(this).execute();
     	// Sample code for executing MySQL statements
     	// new MySQLTask(getApplicationContext(), this, conn).execute("select * from action");
     }
