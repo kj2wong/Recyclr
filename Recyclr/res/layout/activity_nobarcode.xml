@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grass_wallpaper"
+    tools:context="com.knr.recyclr.NobarcodeActivity" >
+    
+    <RelativeLayout 
+        android:id="@+id/transparentOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red_transparent" >
+        <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="38sp"
+	        android:paddingBottom="5dip"
+	        android:text="Recyclr"
+	        android:textStyle="bold"
+	        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+
+    <LinearLayout 
+  	    android:layout_width="match_parent"
+       	android:layout_height="wrap_content"
+       	android:layout_alignParentBottom="true"
+       	android:gravity="center"
+       	android:background="#000000">
+		<ImageView
+		    android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="just our logo"
+	        android:src="@drawable/recycle"
+	        android:paddingTop="10dip" />
+		<TextView 
+		    android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+       		android:textSize="20sp"
+       		android:textColor="#ffffff"
+       		android:text="Powered by HackTheNorth"
+       		android:layout_marginLeft="10dip"
+       		android:paddingTop="14dip"/>		
+  	</LinearLayout>
+
+</RelativeLayout>

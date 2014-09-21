@@ -3,7 +3,6 @@ package com.knr.recyclr;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.TextView;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
