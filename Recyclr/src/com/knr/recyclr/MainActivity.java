@@ -68,6 +68,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     	// Connect to RDS Database
     	new DatabaseConnection(this).execute();
+
     }
 
 

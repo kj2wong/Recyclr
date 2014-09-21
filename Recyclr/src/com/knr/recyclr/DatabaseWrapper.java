@@ -46,8 +46,14 @@ class SQLSelect extends MySQLTask {
     		ResultSet results = stmt.executeQuery(sql[0]);
     		results.next();
     		int[] actions = new int[2];
-    		actions[0] = results.getInt("recycle");
-    		actions[1] = results.getInt("trash");
+    		if (results == null) {
+    			actions[0] = -1;
+    			actions[1] = -1;
+    		}
+    		else {
+    			actions[0] = results.getInt("recycle");
+    			actions[1] = results.getInt("trash");
+    		}
     		stmt.close();
     		return actions;
     	} catch (SQLException ex) {
