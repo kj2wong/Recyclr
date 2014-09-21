@@ -36,14 +36,14 @@
             android:id="@+id/itemDescriptionLabel"
             android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="20dip"
+	        android:layout_marginTop="15dip"
 	        android:textSize="28sp" >
         </TextView>
         <TextView
             android:id="@+id/itemNameLabel"
             android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="6dip"
+	        android:layout_marginTop="4dip"
 	        android:textSize="28sp" >
         </TextView>
         <ImageView
@@ -52,14 +52,14 @@
 	        android:layout_height="200dip"
 	        android:scaleType="fitXY"
 	        android:contentDescription="google search placeholder"
-	        android:layout_marginTop="20dip" >
+	        android:layout_marginTop="15dip" >
         </ImageView>
         
         <TextView
             android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="28sp"
-	        android:layout_marginTop="20dip"
+	        android:layout_marginTop="15dip"
 	        android:text="Select Disposal Type :"
 	        android:textColor="#ffffff" >
         </TextView>
@@ -86,6 +86,12 @@
 		        android:textSize="28sp"
 		        android:onClick="onRadioButtonClicked"/>
 		</RadioGroup>
+		
+        <Button
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="Submit"
+    	/>
     </LinearLayout>
     
 
