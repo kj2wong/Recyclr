@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.RadioButton;
 
 public class AddItemActivity extends ActionBarActivity {
-
+	private boolean isTrash;
+	private String upcCode;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -18,7 +20,7 @@ public class AddItemActivity extends ActionBarActivity {
 		getActionBar().hide();
 		
 		Intent intent = getIntent();
-		String upcCode = intent.getStringExtra(MainActivity.UPC_IDENTIFIER);
+		upcCode = intent.getStringExtra(MainActivity.UPC_IDENTIFIER);
 	    
 	    new RetrieveUpcTask(getApplicationContext(), (Activity)this, R.id.itemImagePlaceholder).execute(upcCode);
 	    DatabaseWrapper db_wrap = new DatabaseWrapper(getApplicationContext(), (Activity)this, MainActivity.getConn());
@@ -52,12 +54,19 @@ public class AddItemActivity extends ActionBarActivity {
 	    switch(view.getId()) {
 	        case R.id.radio_recycle:
 	            if (checked)
-	                
+	                isTrash = false;
 	            break;
 	        case R.id.radio_trash:
 	            if (checked)
-	                
+	                isTrash = true;
 	            break;
 	    }
+	}
+	
+	public void onSubmitButtonClicked(View view)
+	{
+		DatabaseWrapper db_wrap = new DatabaseWrapper(getApplicationContext(), (Activity)this, MainActivity.getConn());
+		db_wrap.setUpc(upcCode, isTrash);
+		finish();
 	}
 }
