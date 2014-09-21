@@ -33,6 +33,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	private LinearLayout infoBtn;
 	private int viewId;
 	private Connection conn;
+	
+	public Connection getConn() {
+		return conn;
+	}
+
+	public void setConn(Connection conn) {
+		this.conn = conn;
+	}
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,22 +67,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 		}
 
     	// Connect to RDS Database
-    	try {
-    		String[] names = {"db_host", "db_user", "db_pass"};
-    		String[] params = JSONHelper.loadMultipleFromAsset(getApplicationContext(), 
-    				"config.json", names);
-    	    conn = DriverManager.getConnection(
-    	    		String.format("jdbc:mysql://%s?user=%s&password=%s", 
-    	    				params[0], params[1], params[2]));
-    	} catch (SQLException ex) {
-    		// TODO: handle any errors
-    	    System.out.println("SQLException: " + ex.getMessage());
-    	    System.out.println("SQLState: " + ex.getSQLState());
-    	    System.out.println("VendorError: " + ex.getErrorCode());
-    	}
-    	
-    	// Sample code for executing MySQL statements
-    	// new MySQLTask(getApplicationContext(), this, conn).execute("select * from action");
+    	new DatabaseConnection(this).execute();
     }
 
 
@@ -119,8 +112,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		String scanContent = scanningResult.getContents();
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		
-    		if(this.viewId==R.id.search_section_btn) {
-    			new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
+    		if(this.viewId==R.id.search_button) {
+    			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn).execute(parsed);
     		}
     		else if (this.viewId==R.id.additem_section_btn) {
     			//Creating the instance of PopupMenu  

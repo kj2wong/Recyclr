@@ -11,6 +11,7 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import java.sql.Connection;
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -18,10 +19,12 @@ import android.os.AsyncTask;
 class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
 	private Context context;
 	private Activity activity;
+	private Connection conn;
 	
-	public RetrieveUpcTask(Context context, Activity activity) {
+	public RetrieveUpcTask(Context context, Activity activity, Connection conn) {
 		this.context = context;
 		this.activity = activity;
+		this.conn = conn;
 	}
 
     protected UpcItem doInBackground(String... upcCodes) {
@@ -55,5 +58,7 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
     protected void onPostExecute(UpcItem item) {
     	// search bar-code against database
     	// create alert message describing recyclable/garbage/compost
+    	DatabaseWrapper db_wrap = new DatabaseWrapper(this.context, this.activity, this.conn);
+    	db_wrap.getAction(item);
     }
 }
