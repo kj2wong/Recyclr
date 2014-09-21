@@ -32,16 +32,17 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	private LinearLayout addBtn;
 	private LinearLayout infoBtn;
 	private int viewId;
-	private Connection conn = null;
+	private static Connection conn = null;
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	public final static String UPC_IDENTIFIER = "com.example.myfirstapp.IDENTIFIER";
 	public static String upcCode;
-	public Connection getConn() {
+	
+	public static Connection getConn() {
 		return conn;
 	}
 
-	public void setConn(Connection conn) {
-		this.conn = conn;
+	public static void setConn(Connection conn) {
+		MainActivity.conn = conn;
 	}
 
     @Override
@@ -116,9 +117,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		upcCode = parsed;
     		if(this.viewId==R.id.search_section_btn) {
-    			DatabaseWrapper db_wrap = new DatabaseWrapper(
-    					getApplicationContext(), (Activity)this, conn);
-        		db_wrap.getAction(parsed);
+    			Intent nintent = new Intent(getApplicationContext(), SearchResultActivity.class);
+    			nintent.putExtra(MainActivity.UPC_IDENTIFIER, upcCode);
+    			this.startActivity(nintent);
     		}
     		else if (this.viewId==R.id.additem_section_btn) {
     			//Creating the instance of PopupMenu  

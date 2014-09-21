@@ -63,9 +63,13 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
     	if (item == null) {
     		// do something
     	} else {
-    		new ImageWrapper(context, activity, viewId).execute(item.description);
-    		TextView tV = (TextView)activity.findViewById(R.id.itemDescriptionLabel);
-    		tV.setText(item.description);
+    		new ImageWrapper(context, activity, viewId).execute(item.itemName + " " + item.description);
+    		TextView description = (TextView)activity.findViewById(R.id.itemDescriptionLabel);
+    		description.setText(item.description);
+    		
+    		TextView itemName = (TextView)activity.findViewById(R.id.itemNameLabel);
+    		itemName.setText(item.itemName);
+    		
     	}
     }
 }

@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 public class DatabaseWrapper {
 	private Context context;
@@ -90,11 +91,10 @@ class SQLSelect extends MySQLTask {
 					disposalType = "Trash";
 				}
 			}
-				
-			Intent intent = new Intent(this.context, SearchResultActivity.class);
-			intent.putExtra(MainActivity.EXTRA_MESSAGE, disposalType);
-			intent.putExtra(MainActivity.UPC_IDENTIFIER, MainActivity.upcCode);
-			this.activity.startActivity(intent);
+			String message = "Disposal Type: " + disposalType;
+			// set the text view
+		    TextView textView = (TextView)activity.findViewById(R.id.itemDisposalLabel);
+		    textView.setText(message);
 		}
 		catch (Exception e) {
 			System.out.println(e);

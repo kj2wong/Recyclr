@@ -34,6 +34,6 @@ public class DatabaseConnection extends AsyncTask<Void, Void, Connection> {
 	
 	@Override
 	protected void onPostExecute(Connection conn) {
-		activity.setConn(conn);
+		MainActivity.setConn(conn);
 	}
 }
