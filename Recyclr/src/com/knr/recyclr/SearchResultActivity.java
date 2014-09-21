@@ -17,13 +17,11 @@ public class SearchResultActivity extends ActionBarActivity {
 		getActionBar().hide();
 		
 		Intent intent = getIntent();
-		String message = "Disposal Type: " + intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		String upcCode = intent.getStringExtra(MainActivity.UPC_IDENTIFIER);
-		// set the text view
-	    TextView textView = (TextView)findViewById(R.id.itemDisposalLabel);
-	    textView.setText(message);
 	    
 	    new RetrieveUpcTask(getApplicationContext(), (Activity)this, R.id.itemImagePlaceholder).execute(upcCode);
+	    DatabaseWrapper db_wrap = new DatabaseWrapper(getApplicationContext(), (Activity)this, MainActivity.getConn());
+		db_wrap.getAction(upcCode);
 	}
 
 	@Override
