@@ -67,7 +67,6 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="-10dip"
             android:background="@color/red_transparent"
             android:orientation="horizontal" >
 
@@ -78,13 +77,16 @@
 		        android:textColor="#ffffff"
 		        android:textSize="28sp"
 		        android:onClick="onRadioButtonClicked"/>
-		    <RadioButton android:id="@+id/radio_trash"
+
+		    <RadioButton
+		        android:id="@+id/radio_trash"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
-		        android:text="Trash"
+		        android:onClick="onRadioButtonClicked"
+		        android:text="Trash "
 		        android:textColor="#ffffff"
-		        android:textSize="28sp"
-		        android:onClick="onRadioButtonClicked"/>
+		        android:textSize="28sp" />
+
 		</RadioGroup>
 		
         <Button
