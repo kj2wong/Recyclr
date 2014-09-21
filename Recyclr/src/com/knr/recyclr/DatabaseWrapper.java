@@ -54,13 +54,17 @@ class SQLSelect extends MySQLTask {
     		ResultSet results = stmt.executeQuery(sql[0]);
     		results.next();
     		int[] actions = new int[2];
-    		if (results == null) {
-    			actions[0] = -1;
-    			actions[1] = -1;
-    		}
-    		else {
+    		try {
     			actions[0] = results.getInt("recycle");
+    		}
+    		catch (Exception e) {
+    			actions[0] = -1;
+    		}
+    		try {
     			actions[1] = results.getInt("trash");
+    		}
+    		catch (Exception e){
+    			actions[1] = -1;
     		}
     		stmt.close();
     		return actions;
@@ -78,8 +82,6 @@ class SQLSelect extends MySQLTask {
 	@Override
 	protected void onPostExecute(int[] results) {
 		try {
-			System.out.println("@@@@@@@Recycle: " + results[0] + " Trash: " + results[1]);
-			
 			String disposalType = "Sorry, we don't know yet!";
 			if(results[0] != -1 || results[1] != -1 ) {
 				if(results[0] > results[1]) {
