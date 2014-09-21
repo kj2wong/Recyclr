@@ -23,8 +23,6 @@ public class AddItemActivity extends ActionBarActivity {
 		upcCode = intent.getStringExtra(MainActivity.UPC_IDENTIFIER);
 	    
 	    new RetrieveUpcTask(getApplicationContext(), (Activity)this, R.id.itemImagePlaceholder).execute(upcCode);
-	    DatabaseWrapper db_wrap = new DatabaseWrapper(getApplicationContext(), (Activity)this, MainActivity.getConn());
-		db_wrap.getAction(upcCode);
 	}
 
 	@Override
