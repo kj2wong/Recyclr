@@ -28,6 +28,13 @@ public class NobarcodeActivity extends ActionBarActivity {
         // Defined Array values to show in ListView
         ArrayList<NoBarcodeItem> values = new ArrayList<NoBarcodeItem>();
         values.add(new NoBarcodeItem("Paper", NoBarcodeItem.DisposeType.Recycle, null));
+        values.add(new NoBarcodeItem("Plastic Containers", NoBarcodeItem.DisposeType.Recycle, null));
+        values.add(new NoBarcodeItem("Plastic Packaging", NoBarcodeItem.DisposeType.Trash, null));
+        values.add(new NoBarcodeItem("Aluminum & Tin Cans", NoBarcodeItem.DisposeType.Recycle, null));
+        values.add(new NoBarcodeItem("Metal", NoBarcodeItem.DisposeType.Recycle, null));
+        values.add(new NoBarcodeItem("Carboard", NoBarcodeItem.DisposeType.Recycle, null));
+        values.add(new NoBarcodeItem("Glass Botles", NoBarcodeItem.DisposeType.Recycle, null));
+        values.add(new NoBarcodeItem("Paper", NoBarcodeItem.DisposeType.Recycle, null));
         
         // Define a new Adapter
         // First parameter - Context
