@@ -1,18 +1,23 @@
 package com.knr.recyclr;
 
-import android.app.Activity;
-import android.content.Context;
-import android.os.AsyncTask;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+
 public class DatabaseWrapper {
 	private Context context;
 	private Activity activity;
 	private Connection conn;
+	
+	public enum DisposeType {
+		Recycle, Trash
+	};
 	
 	public DatabaseWrapper (Context context, Activity activity, Connection conn){
 		this.context = context;
@@ -31,6 +36,7 @@ public class DatabaseWrapper {
 
 //Class for executing select SQL statements
 class SQLSelect extends MySQLTask {
+	
 	public SQLSelect(Context context, Activity activity, Connection conn) {
 		super(context, activity, conn);	
 	}
@@ -59,6 +65,21 @@ class SQLSelect extends MySQLTask {
 	protected void onPostExecute(int[] results) {
 		try {
 			System.out.println("@@@@@@@Recycle: " + results[0] + " Trash: " + results[1]);
+			
+			String disposalType = "Sorry, we don't know yet!";
+			if(results[0] != -1 || results[1] != -1 ) {
+				if(results[0] > results[1]) {
+					disposalType = "Recycle";
+				}
+				if(results[1] > results[0]) {
+					disposalType = "Trash";
+				}
+			}
+				
+			
+			Intent intent = new Intent(this.context, SearchResultActivity.class);
+			intent.putExtra(MainActivity.EXTRA_MESSAGE, disposalType);
+			this.activity.startActivity(intent);
 		}
 		catch (Exception e) {
 			System.out.println(e);

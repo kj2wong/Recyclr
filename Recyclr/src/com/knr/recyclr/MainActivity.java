@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	private LinearLayout infoBtn;
 	private int viewId;
 	private Connection conn;
+	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	
 	public Connection getConn() {
 		return conn;

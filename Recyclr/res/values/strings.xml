@@ -16,5 +16,6 @@
     <string name="item_compost_string">Compost</string>
     <string name="item_garbage_string">Garbage</string>
     <string name="title_activity_nobarcode">NobarcodeActivity</string>
+    <string name="title_activity_search_result">SearchResultActivity</string>
 
 </resources>

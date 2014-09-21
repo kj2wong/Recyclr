@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/grass_wallpaper"
+    tools:context="com.knr.recyclr.SearchResultActivity" >
+    
+    <RelativeLayout 
+        android:id="@+id/transparentOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/red_transparent" >
+        <TextView
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textSize="38sp"
+	        android:paddingBottom="5dip"
+	        android:text="Scan Result"
+	        android:textStyle="bold"
+	        android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    
+    <LinearLayout 
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/transparentOverlay"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+    	android:paddingLeft="@dimen/activity_horizontal_margin"
+    	android:paddingRight="@dimen/activity_horizontal_margin"
+    	android:paddingTop="40dip"
+    	android:gravity="center"
+        >
+        <TextView
+            android:id="@+id/itemDescriptionLabel"
+            android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="30dip"
+	        android:textSize="22sp" >
+        </TextView>
+        <ImageView
+            android:id="@+id/itemImagePlaceholder"
+            android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="google search placeholder"
+	        android:layout_marginTop="30dip" >
+        </ImageView>
+        <TextView
+            android:id="@+id/itemDisposalLabel"
+            android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="30dip"
+	        android:textSize="22sp" >
+        </TextView>
+    </LinearLayout>
+    
+
+    <LinearLayout 
+  	    android:layout_width="match_parent"
+       	android:layout_height="wrap_content"
+       	android:layout_alignParentBottom="true"
+       	android:gravity="center"
+       	android:background="#000000">
+		<ImageView
+		    android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:contentDescription="just our logo"
+	        android:src="@drawable/recycle"
+	        android:paddingTop="10dip" />
+		<TextView 
+		    android:layout_width="wrap_content"
+       		android:layout_height="wrap_content"
+       		android:textSize="20sp"
+       		android:textColor="#ffffff"
+       		android:text="Powered by HackTheNorth"
+       		android:layout_marginLeft="10dip"
+       		android:paddingTop="14dip"/>		
+  	</LinearLayout>
+
+</RelativeLayout>
