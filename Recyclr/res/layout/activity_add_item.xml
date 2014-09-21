@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/grass_wallpaper"
-    tools:context="com.knr.recyclr.SearchResultActivity" >
+    tools:context="com.knr.recyclr.AddItemActivity" >
     
     <RelativeLayout 
         android:id="@+id/transparentOverlay"
@@ -15,7 +15,7 @@
 	        android:layout_height="wrap_content"
 	        android:textSize="38sp"
 	        android:paddingBottom="5dip"
-	        android:text="Scan Result"
+	        android:text="Add Result"
 	        android:textStyle="bold"
 	        android:layout_centerHorizontal="true"/>
     </RelativeLayout>
@@ -52,16 +52,37 @@
 	        android:layout_height="200dip"
 	        android:scaleType="fitXY"
 	        android:contentDescription="google search placeholder"
-	        android:layout_marginTop="30dip" >
+	        android:layout_marginTop="20dip" >
         </ImageView>
+        
         <TextView
-            android:id="@+id/itemDisposalLabel"
             android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_marginTop="20dip"
 	        android:textSize="28sp"
+	        android:layout_marginTop="20dip"
+	        android:text="Select Disposal Type :"
 	        android:textColor="#ffffff" >
         </TextView>
+        <RadioGroup
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    android:layout_marginLeft="-10dip">
+		    <RadioButton android:id="@+id/radio_recycle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Recycle"
+		        android:textColor="#ffffff"
+		        android:textSize="28sp"
+		        android:onClick="onRadioButtonClicked"/>
+		    <RadioButton android:id="@+id/radio_trash"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="Trash"
+		        android:textColor="#ffffff"
+		        android:textSize="28sp"
+		        android:onClick="onRadioButtonClicked"/>
+		</RadioGroup>
     </LinearLayout>
     
 
