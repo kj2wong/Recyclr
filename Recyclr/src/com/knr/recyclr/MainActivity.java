@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -24,9 +28,9 @@ import org.json.JSONObject;
 
 public class MainActivity extends ActionBarActivity implements OnClickListener{
 	
-	private ImageView scanBtn;
-	private ImageView addBtn;
-	private ImageView infoBtn;
+	private LinearLayout scanBtn;
+	private LinearLayout addBtn;
+	private LinearLayout infoBtn;
 	private int viewId;
 	private Connection conn;
 	
@@ -43,15 +47,15 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getActionBar().hide();
-        scanBtn = (ImageView)findViewById(R.id.search_button);
+        scanBtn = (LinearLayout)findViewById(R.id.search_section_btn);
         scanBtn.setOnClickListener(this);
         
-        addBtn = (ImageView)findViewById(R.id.add_item);
+        addBtn = (LinearLayout)findViewById(R.id.additem_section_btn);
         addBtn.setOnClickListener(this);
 
         scanBtn.setOnClickListener(this);
 
-        infoBtn = (ImageView)findViewById(R.id.indexes_button);
+        infoBtn = (LinearLayout)findViewById(R.id.nobarcode_section_btn);
         infoBtn.setOnClickListener(this);
         
         // Startup JDBC driver
@@ -62,9 +66,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 			e.printStackTrace();
 		}
 
+    	// Connect to RDS Database
     	new DatabaseConnection(this).execute();
-    	// Sample code for executing MySQL statements
-    	// new MySQLTask(getApplicationContext(), this, conn).execute("select * from action");
     }
 
 
@@ -90,13 +93,14 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     public void onClick(View v){
     	//respond to clicks
     	this.viewId = v.getId();
-    	if(v.getId()==R.id.search_button || v.getId()==R.id.add_item){
+    	if(v.getId()==R.id.search_section_btn || v.getId()==R.id.additem_section_btn){
     		//scan
     		IntentIntegrator scanIntegrator = new IntentIntegrator(this);
     		scanIntegrator.initiateScan();
 		}
-    	if(v.getId()==R.id.indexes_button) {
-    		// open another list activities that lists common materials
+    	else if (v.getId()==R.id.nobarcode_section_btn) {
+    		Intent intent = new Intent(this, NobarcodeActivity.class);
+        	startActivity(intent);
     	}
 	}
     
@@ -109,9 +113,9 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		
     		if(this.viewId==R.id.search_button) {
-    			new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
+    			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn).execute(parsed);
     		}
-    		else if (this.viewId==R.id.add_item) {
+    		else if (this.viewId==R.id.additem_section_btn) {
     			//Creating the instance of PopupMenu  
                 PopupMenu popup = new PopupMenu(MainActivity.this, this.addBtn);  
                 //Inflating the Popup using xml file  

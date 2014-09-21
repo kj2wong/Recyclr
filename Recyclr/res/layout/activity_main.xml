@@ -14,7 +14,8 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:textSize="38sp" 
-	        android:text="Recyclr"
+	        android:paddingBottom="5dip"
+	        android:text="Non-Barcode Things"
 	        android:textStyle="bold"
 	        android:layout_centerHorizontal="true"/>
     </RelativeLayout>
@@ -30,6 +31,7 @@
     	android:paddingTop="40dip"
         >
         <LinearLayout 
+            android:id="@+id/search_section_btn"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:paddingTop="30dip"
@@ -51,6 +53,7 @@
 		</LinearLayout>
         
 		<LinearLayout 
+		    android:id="@+id/additem_section_btn"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:paddingTop="30dip"
@@ -73,10 +76,13 @@
 		        android:textSize="28sp" />
 		</LinearLayout>
 		
-		<LinearLayout 
+		<LinearLayout
+		    android:id="@+id/nobarcode_section_btn"
         	android:layout_width="match_parent"
         	android:layout_height="wrap_content"
         	android:paddingTop="30dip"
+        	android:clickable="true"
+        	android:onClick="loadNobarcodeActivity"
         	>
 		    <ImageView
 		        android:id="@+id/indexes_button"
