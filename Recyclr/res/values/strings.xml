@@ -18,5 +18,6 @@
     <string name="title_activity_nobarcode">NobarcodeActivity</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="title_activity_add_item">AddItemActivity</string>
+    <string name="poweredBy">Powered by Poutine.</string>
 
 </resources>

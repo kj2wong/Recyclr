@@ -115,7 +115,7 @@
        		android:layout_height="wrap_content"
        		android:textSize="20sp"
        		android:textColor="#ffffff"
-       		android:text="Powered by HackTheNorth"
+       		android:text="@string/poweredBy"
        		android:layout_marginLeft="10dip"
        		android:paddingTop="14dip"/>		
   	</LinearLayout>
