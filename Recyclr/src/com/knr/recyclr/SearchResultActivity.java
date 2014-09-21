@@ -1,11 +1,11 @@
 package com.knr.recyclr;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class SearchResultActivity extends ActionBarActivity {
@@ -18,10 +18,12 @@ public class SearchResultActivity extends ActionBarActivity {
 		
 		Intent intent = getIntent();
 		String message = "Disposal Type: " + intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		
+		String upcCode = intent.getStringExtra(MainActivity.UPC_IDENTIFIER);
 		// set the text view
 	    TextView textView = (TextView)findViewById(R.id.itemDisposalLabel);
 	    textView.setText(message);
+	    
+	    new RetrieveUpcTask(getApplicationContext(), (Activity)this, R.id.itemImagePlaceholder).execute(upcCode);
 	}
 
 	@Override

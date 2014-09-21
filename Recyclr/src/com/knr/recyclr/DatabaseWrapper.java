@@ -14,6 +14,7 @@ public class DatabaseWrapper {
 	private Context context;
 	private Activity activity;
 	private Connection conn;
+	private UpcItem item;
 	
 	public enum DisposeType {
 		Recycle, Trash
@@ -28,8 +29,8 @@ public class DatabaseWrapper {
     	// new MySQLTask(getApplicationContext(), this, conn).execute("select * from action");
 	}
 	
-	public void getAction(UpcItem upc){
-		String query = "SELECT recycle, trash FROM action where UPC = \"" + upc.number + "\"";
+	public void getAction(String upcNumber){
+		String query = "SELECT recycle, trash FROM action where UPC = \"" + upcNumber + "\"";
 		new SQLSelect(context, activity, conn).execute(query);
 	}
 	
@@ -88,9 +89,9 @@ class SQLSelect extends MySQLTask {
 				}
 			}
 				
-			
 			Intent intent = new Intent(this.context, SearchResultActivity.class);
 			intent.putExtra(MainActivity.EXTRA_MESSAGE, disposalType);
+			intent.putExtra(MainActivity.UPC_IDENTIFIER, MainActivity.upcCode);
 			this.activity.startActivity(intent);
 		}
 		catch (Exception e) {

@@ -34,7 +34,8 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	private int viewId;
 	private Connection conn = null;
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-	
+	public final static String UPC_IDENTIFIER = "com.example.myfirstapp.IDENTIFIER";
+	public static String upcCode;
 	public Connection getConn() {
 		return conn;
 	}
@@ -113,9 +114,11 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		//we have a result
     		String scanContent = scanningResult.getContents();
     		String parsed = scanContent.substring(1, scanContent.length()-1);
-    		
+    		upcCode = parsed;
     		if(this.viewId==R.id.search_section_btn) {
-    			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn, 0).execute(parsed);
+    			DatabaseWrapper db_wrap = new DatabaseWrapper(
+    					getApplicationContext(), (Activity)this, conn);
+        		db_wrap.getAction(scanContent);
     		}
     		else if (this.viewId==R.id.additem_section_btn) {
     			//Creating the instance of PopupMenu  

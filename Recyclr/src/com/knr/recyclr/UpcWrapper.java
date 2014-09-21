@@ -12,20 +12,20 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.sql.Connection;
+
 import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.widget.TextView;
 
 class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
 	private Context context;
 	private Activity activity;
-	private Connection conn;
 	private int viewId;
 	
-	public RetrieveUpcTask(Context context, Activity activity, Connection conn, int view) {
+	public RetrieveUpcTask(Context context, Activity activity, int view) {
 		this.context = context;
 		this.activity = activity;
-		this.conn = conn;
 		this.viewId = view;
 	}
 
@@ -64,8 +64,8 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
     		// do something
     	} else {
     		new ImageWrapper(context, activity, viewId).execute(item.description);
-    		DatabaseWrapper db_wrap = new DatabaseWrapper(this.context, this.activity, this.conn);
-    		db_wrap.getAction(item);
+    		TextView tV = (TextView)activity.findViewById(R.id.itemDescriptionLabel);
+    		tV.setText(item.description);
     	}
     }
 }
