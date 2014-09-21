@@ -102,14 +102,18 @@ class SQLSelect extends MySQLTask {
 
 // Class for executing insert SQL statements 
 class SQLUpdate extends MySQLTask {
-	public SQLUpdate(Context context, Activity activity, Connection conn) {
+	private UpcItem item;
+	public SQLUpdate(Context context, Activity activity, Connection conn, UpcItem item) {
 		super(context, activity, conn);	
+		this.item = item;
 	}
 	
     @Override
     protected int[] doInBackground(String... sql) {
     	try {
     		Statement stmt = conn.createStatement();
+    		String query = "SELECT recycle, trash FROM action where UPC = \"" + item.number + "\"";
+    		stmt.executeQuery(query);
     		stmt.executeUpdate(sql[0]);
     		stmt.close();
     	} catch (SQLException ex) {
