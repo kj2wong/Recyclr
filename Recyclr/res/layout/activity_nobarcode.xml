@@ -15,10 +15,20 @@
 	        android:layout_height="wrap_content"
 	        android:textSize="38sp"
 	        android:paddingBottom="5dip"
-	        android:text="Recyclr"
+	        android:text="Non-Barcode Things"
 	        android:textStyle="bold"
 	        android:layout_centerHorizontal="true"/>
     </RelativeLayout>
+    
+     <ListView
+        android:id="@+id/list_nobarcodeitems"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_below="@id/transparentOverlay"
+        android:layout_marginTop="8dip"
+        android:layout_marginLeft="16dip"
+        android:layout_marginRight="16dip">
+    </ListView>
 
     <LinearLayout 
   	    android:layout_width="match_parent"

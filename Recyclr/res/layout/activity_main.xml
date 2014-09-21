@@ -15,7 +15,7 @@
 	        android:layout_height="wrap_content"
 	        android:textSize="38sp" 
 	        android:paddingBottom="5dip"
-	        android:text="Non-Barcode Things"
+	        android:text="Recyclr"
 	        android:textStyle="bold"
 	        android:layout_centerHorizontal="true"/>
     </RelativeLayout>
