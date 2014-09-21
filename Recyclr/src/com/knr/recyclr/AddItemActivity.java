@@ -65,6 +65,7 @@ public class AddItemActivity extends ActionBarActivity {
 	
 	public void onSubmitButtonClicked(View view)
 	{
-		
+		DatabaseWrapper db_wrap = new DatabaseWrapper(getApplicationContext(), (Activity)this, MainActivity.getConn());
+		db_wrap.setUpc(upcCode, isTrash);
 	}
 }
