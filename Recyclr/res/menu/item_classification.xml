@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
     <item android:id="@+id/item_recycling" android:title="@string/item_recycling_string"></item>
-    <item android:id="@+id/item_compost" android:title="@string/item_compost_string"></item>
     <item android:id="@+id/item_garbage" android:title="@string/item_garbage_string"></item>
 
 </menu>

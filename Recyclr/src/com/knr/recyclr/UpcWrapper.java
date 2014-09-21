@@ -20,11 +20,13 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
 	private Context context;
 	private Activity activity;
 	private Connection conn;
+	private int viewId;
 	
-	public RetrieveUpcTask(Context context, Activity activity, Connection conn) {
+	public RetrieveUpcTask(Context context, Activity activity, Connection conn, int view) {
 		this.context = context;
 		this.activity = activity;
 		this.conn = conn;
+		this.viewId = view;
 	}
 
     protected UpcItem doInBackground(String... upcCodes) {
@@ -40,8 +42,8 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
    	        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
    	        	ByteArrayOutputStream out = new ByteArrayOutputStream();
    	        	response.getEntity().writeTo(out);
-   	        	out.close();
    	        	String responseString = out.toString();
+   	        	out.close();
    	        	return new UpcItem(responseString);
    	        } else {
       	        //Closes the connection.
@@ -58,7 +60,12 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
     protected void onPostExecute(UpcItem item) {
     	// search bar-code against database
     	// create alert message describing recyclable/garbage/compost
-    	DatabaseWrapper db_wrap = new DatabaseWrapper(this.context, this.activity, this.conn);
-    	db_wrap.getAction(item);
+    	if (item == null) {
+    		// do something
+    	} else {
+    		new ImageWrapper(context, activity, viewId).execute(item.description);
+    		DatabaseWrapper db_wrap = new DatabaseWrapper(this.context, this.activity, this.conn);
+    		db_wrap.getAction(item);
+    	}
     }
 }

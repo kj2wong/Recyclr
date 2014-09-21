@@ -19,7 +19,7 @@ public class DatabaseWrapper {
 		Recycle, Trash
 	};
 	
-	public DatabaseWrapper (Context context, Activity activity, Connection conn){
+	public DatabaseWrapper (Context context, Activity activity, Connection conn) {
 		this.context = context;
 		this.activity = activity;
 		this.conn = conn;
@@ -31,6 +31,10 @@ public class DatabaseWrapper {
 	public void getAction(UpcItem upc){
 		String query = "SELECT recycle, trash FROM action where UPC = \"" + upc.number + "\"";
 		new SQLSelect(context, activity, conn).execute(query);
+	}
+	
+	public void setUpc(UpcItem upc){
+		
 	}
 }
 
@@ -48,8 +52,14 @@ class SQLSelect extends MySQLTask {
     		ResultSet results = stmt.executeQuery(sql[0]);
     		results.next();
     		int[] actions = new int[2];
-    		actions[0] = results.getInt("recycle");
-    		actions[1] = results.getInt("trash");
+    		if (results == null) {
+    			actions[0] = -1;
+    			actions[1] = -1;
+    		}
+    		else {
+    			actions[0] = results.getInt("recycle");
+    			actions[1] = results.getInt("trash");
+    		}
     		stmt.close();
     		return actions;
     	} catch (SQLException ex) {
@@ -57,6 +67,8 @@ class SQLSelect extends MySQLTask {
     	    System.out.println("SQLException: " + ex.getMessage());
     	    System.out.println("SQLState: " + ex.getSQLState());
     	    System.out.println("VendorError: " + ex.getErrorCode());
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
     	}
         return null;
     }

@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 	private LinearLayout addBtn;
 	private LinearLayout infoBtn;
 	private int viewId;
-	private Connection conn;
+	private Connection conn = null;
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	
 	public Connection getConn() {
@@ -69,6 +69,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
 
     	// Connect to RDS Database
     	new DatabaseConnection(this).execute();
+
     }
 
 
@@ -114,7 +115,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		
     		if(this.viewId==R.id.search_section_btn) {
-    			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn).execute(parsed);
+    			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn, 0).execute(parsed);
     		}
     		else if (this.viewId==R.id.additem_section_btn) {
     			//Creating the instance of PopupMenu  
