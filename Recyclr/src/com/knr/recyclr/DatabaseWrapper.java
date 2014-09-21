@@ -35,8 +35,8 @@ public class DatabaseWrapper {
 		new SQLSelect(context, activity, conn).execute(query);
 	}
 	
-	public void setUpc(UpcItem upc, Boolean trash){
-		new SQLUpdate(context, activity, conn, upc, trash).execute();
+	public void setUpc(String upcNumber, Boolean trash){
+		new SQLUpdate(context, activity, conn, upcNumber, trash).execute();
 	}
 }
 
@@ -104,12 +104,12 @@ class SQLSelect extends MySQLTask {
 
 // Class for executing insert SQL statements 
 class SQLUpdate extends MySQLTask {
-	private UpcItem item;
+	private String itemNum;
 	private Boolean trash;
 	
-	public SQLUpdate(Context context, Activity activity, Connection conn, UpcItem item, Boolean trash) {
+	public SQLUpdate(Context context, Activity activity, Connection conn, UpcNumber itemNum, Boolean trash) {
 		super(context, activity, conn);	
-		this.item = item;
+		this.item = itemNum;
 		this.trash = trash;
 	}
 	
@@ -117,7 +117,7 @@ class SQLUpdate extends MySQLTask {
     protected int[] doInBackground(String... sql) {
     	try {
     		Statement stmt = conn.createStatement();
-    		String query = "SELECT recycle, trash FROM action where UPC = \"" + item.number + "\"";
+    		String query = "SELECT recycle, trash FROM action where UPC = \"" + itemNum + "\"";
     		ResultSet results = stmt.executeQuery(query);
     		results.next();
     		int[] actions = new int[2];
@@ -127,15 +127,15 @@ class SQLUpdate extends MySQLTask {
     			actions[1] = results.getInt("trash");
     			// Update values 
     			if(trash) {
-    				update = "update action set trash = trash+1 where upc = \"" + item.number + "\"";
+    				update = "update action set trash = trash+1 where upc = \"" + itemNum + "\"";
     			} else {
-    				update = "update action set recycle = recycle+1 where upc = \"" + item.number + "\"";
+    				update = "update action set recycle = recycle+1 where upc = \"" + itemNum + "\"";
     			}
     		}
     		catch (Exception e) {
     			// Insert new
     			update = String.format("insert into action (upc, recycle, trash) values (\"%s\", \"%s\", \"%s\")", 
-    					item.number, !trash ? 1:0, trash ? 1:0);
+    					itemNum, !trash ? 1:0, trash ? 1:0);
     		}
     		stmt.execute(update);
     		stmt.close();
