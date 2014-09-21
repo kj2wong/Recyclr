@@ -28,7 +28,8 @@
         <activity
             android:name=".NobarcodeActivity"
             android:label="@string/title_activity_nobarcode"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.knr.recyclr.MainActivity" />
@@ -36,7 +37,8 @@
         <activity
             android:name=".SearchResultActivity"
             android:label="@string/title_activity_search_result"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.knr.recyclr.MainActivity" />
@@ -44,7 +46,8 @@
         <activity
             android:name=".AddItemActivity"
             android:label="@string/title_activity_add_item"
-            android:parentActivityName=".MainActivity" >
+            android:parentActivityName=".MainActivity" 
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.knr.recyclr.MainActivity" />
