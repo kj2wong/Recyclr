@@ -112,7 +112,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		String scanContent = scanningResult.getContents();
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		
-    		if(this.viewId==R.id.search_button) {
+    		if(this.viewId==R.id.search_section_btn) {
     			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn).execute(parsed);
     		}
     		else if (this.viewId==R.id.additem_section_btn) {

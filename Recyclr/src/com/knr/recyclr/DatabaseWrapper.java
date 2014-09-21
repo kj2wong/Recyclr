@@ -36,12 +36,16 @@ class SQLSelect extends MySQLTask {
 	}
 	
     @Override
-    protected ResultSet doInBackground(String... sql) {
+    protected int[] doInBackground(String... sql) {
     	try {
     		Statement stmt = conn.createStatement();
     		ResultSet results = stmt.executeQuery(sql[0]);
+    		results.next();
+    		int[] actions = new int[2];
+    		actions[0] = results.getInt("recycle");
+    		actions[1] = results.getInt("trash");
     		stmt.close();
-    		return results;
+    		return actions;
     	} catch (SQLException ex) {
     	    // handle any errors
     	    System.out.println("SQLException: " + ex.getMessage());
@@ -52,13 +56,9 @@ class SQLSelect extends MySQLTask {
     }
 	
 	@Override
-	protected void onPostExecute(ResultSet result) {
+	protected void onPostExecute(int[] results) {
 		try {
-			while(result.next()){
-				int recycle_count = result.getInt("recycle");
-				int trash_count = result.getInt("trash");
-				System.out.println("@@@@@@@Recycle: " + recycle_count + " Trash: " + trash_count);
-			}
+			System.out.println("@@@@@@@Recycle: " + results[0] + " Trash: " + results[1]);
 		}
 		catch (Exception e) {
 			System.out.println(e);
@@ -73,7 +73,7 @@ class SQLUpdate extends MySQLTask {
 	}
 	
     @Override
-    protected ResultSet doInBackground(String... sql) {
+    protected int[] doInBackground(String... sql) {
     	try {
     		Statement stmt = conn.createStatement();
     		stmt.executeUpdate(sql[0]);
@@ -89,7 +89,7 @@ class SQLUpdate extends MySQLTask {
 }
 
 // Class for executing MySQL statements asynchronously
-class MySQLTask extends AsyncTask<String, Void, ResultSet> {
+class MySQLTask extends AsyncTask<String, Void, int[]> {
 	protected Context context;
 	protected Activity activity;
 	protected Connection conn;
@@ -101,7 +101,7 @@ class MySQLTask extends AsyncTask<String, Void, ResultSet> {
 	}
 	
     @Override
-    protected ResultSet doInBackground(String... sql) {
+    protected int[] doInBackground(String... sql) {
         return null;
     }
 }
