@@ -104,8 +104,12 @@ public class ImageWrapper extends AsyncTask<String, Void, Bitmap>{
 	
 	@Override
 	protected void onPostExecute(Bitmap img) {
-		// Update image on UI
-		ImageView view = (ImageView) activity.findViewById(target);
-	    view.setImageBitmap(img);
+		if(img == null) {
+			// no image found
+		} else {
+			// Update image on UI
+			ImageView view = (ImageView) activity.findViewById(target);
+			view.setImageBitmap(img);
+		}
 	}
 }

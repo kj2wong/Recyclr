@@ -14,7 +14,7 @@ public class DatabaseWrapper {
 	private Activity activity;
 	private Connection conn;
 	
-	public DatabaseWrapper (Context context, Activity activity, Connection conn){
+	public DatabaseWrapper (Context context, Activity activity, Connection conn) {
 		this.context = context;
 		this.activity = activity;
 		this.conn = conn;
@@ -51,6 +51,8 @@ class SQLSelect extends MySQLTask {
     	    System.out.println("SQLException: " + ex.getMessage());
     	    System.out.println("SQLState: " + ex.getSQLState());
     	    System.out.println("VendorError: " + ex.getErrorCode());
+    	} catch (Exception e) {
+    		System.out.println(e.getMessage());
     	}
         return null;
     }
