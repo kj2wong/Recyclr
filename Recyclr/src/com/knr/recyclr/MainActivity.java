@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
        		catch (JSONException e) {
        			// TODO: things
        		}
-    	    conn = DriverManager.getConnection(
+    	    this.conn = DriverManager.getConnection(
     	    		String.format("jdbc:mysql://%s?user=%s&password=%s", host, user, pass));
     	} catch (SQLException ex) {
     		// TODO: handle any errors
@@ -124,7 +124,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener{
     		String parsed = scanContent.substring(1, scanContent.length()-1);
     		
     		if(this.viewId==R.id.search_button) {
-    			new RetrieveUpcTask(getApplicationContext(), (Activity)this).execute(parsed);
+    			new RetrieveUpcTask(getApplicationContext(), (Activity)this, conn).execute(parsed);
     		}
     		else if (this.viewId==R.id.add_item) {
     			//Creating the instance of PopupMenu  
