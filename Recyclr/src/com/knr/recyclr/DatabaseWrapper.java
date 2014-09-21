@@ -27,6 +27,10 @@ public class DatabaseWrapper {
 		String query = "SELECT recycle, trash FROM action where UPC = \"" + upc.number + "\"";
 		new SQLSelect(context, activity, conn).execute(query);
 	}
+	
+	public void setUpc(UpcItem upc){
+		
+	}
 }
 
 //Class for executing select SQL statements
