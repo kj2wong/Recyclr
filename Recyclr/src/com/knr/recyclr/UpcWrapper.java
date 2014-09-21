@@ -40,8 +40,8 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
    	        if(statusLine.getStatusCode() == HttpStatus.SC_OK){
    	        	ByteArrayOutputStream out = new ByteArrayOutputStream();
    	        	response.getEntity().writeTo(out);
-   	        	out.close();
    	        	String responseString = out.toString();
+   	        	out.close();
    	        	return new UpcItem(responseString);
    	        } else {
       	        //Closes the connection.
@@ -58,6 +58,7 @@ class RetrieveUpcTask extends AsyncTask<String, Void, UpcItem> {
     protected void onPostExecute(UpcItem item) {
     	// search bar-code against database
     	// create alert message describing recyclable/garbage/compost
+    	new ImageWrapper(context, activity, 0).execute(item.description);
     	DatabaseWrapper db_wrap = new DatabaseWrapper(this.context, this.activity, this.conn);
     	db_wrap.getAction(item);
     }
