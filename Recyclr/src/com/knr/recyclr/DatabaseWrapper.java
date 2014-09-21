@@ -107,9 +107,9 @@ class SQLUpdate extends MySQLTask {
 	private String itemNum;
 	private Boolean trash;
 	
-	public SQLUpdate(Context context, Activity activity, Connection conn, UpcNumber itemNum, Boolean trash) {
+	public SQLUpdate(Context context, Activity activity, Connection conn, String itemNum, Boolean trash) {
 		super(context, activity, conn);	
-		this.item = itemNum;
+		this.itemNum = itemNum;
 		this.trash = trash;
 	}
 	
